@@ -12,6 +12,8 @@
      -> nous devons overider le _mint du parent le plus proche pour pouvoir l'utiliser -> car il est déclaré dans plusieurs parents( ERC20, ERC20Capped)
      -> se referer au code (Token.sol)
 
+-git config --global core.autocrlf false         
+
 
 # Tests 
 - Voici quelques exemples de tests possibles pour le contrat Token fournis par chatGPT :

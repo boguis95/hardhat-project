@@ -1,0 +1,7 @@
+{
+  "curve": "secp256k1",
+  "privateKey": "0x7988f921e3f9034accd387ff9711f38bb0347fb891f3ac07464705a614a60db6",
+  "publicKey": "0x041d59aaf0539462b57d4be0285f548512f1755be0b1a6d8acf19487d5f9c3ffc8b77cb8bda6101df584535625199dab8a5b31c410d271dcb9bee3fecfc2c48a23",
+  "compressedPublicKey": "0x031d59aaf0539462b57d4be0285f548512f1755be0b1a6d8acf19487d5f9c3ffc8",
+  "_isSigningKey": true
+}

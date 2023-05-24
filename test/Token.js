@@ -14,7 +14,7 @@ describe('Token contract test', () => {
 
   beforeEach(async () => {
     Token = await hre.ethers.getContractFactory("Token");
-    [owner, addr1, addr2] = await hre.ethers.getSigners();
+    [owner, addr1, addr2] = await ethers.getSigners();
     TokenDeployed = await Token.deploy(maxSupply, blockReward);
     //console.log(TokenDeployed);
 
@@ -44,7 +44,7 @@ describe('Token contract test', () => {
     it("should set the max capped suppy to the argument provided during deployement", async () => {
 
       const maxCappedSupplyValue = await TokenDeployed.cap();
-      //Nous dormatons la valeur qui à la base est un BigNumber en type Number compréhensible par le console
+      //Nous formatons la valeur qui à la base est un BigNumber en type Number compréhensible par le console
       expect(Number(hre.ethers.utils.formatEther(maxCappedSupplyValue))).to.equal(maxSupply);
     });
 

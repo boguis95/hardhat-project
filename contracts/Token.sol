@@ -11,24 +11,26 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 //ERC20capped herite dèja de ERC20 -> permet de définir le nombre de token maximal(plafond) que l'on va créer
 
 contract Token is ERC20Burnable, ERC20Capped {
-    //payable pour pouvoir appeler selfdestruct() avec l'adresse diu owner
+    //payable pour pouvoir appeler selfdestruct() avec l'adresse du owner
     // selfdestruct() -> permet de détruire le contrat en cas de besoins
     //               -> prend en argument une adresse sur le quel on veut envoyer les ethers restants
     //               -> dans le constrat que l'on veut détruire (meme si ici nous avons affaire à des tokens)
     address payable public owner;
     uint256 public blockReward;
 
-    constructor(uint256 cap, uint256 _reward)
+    constructor(uint256 cap, uint256 _reward, address _owner)
         ERC20("BoguisLaye", "BGL")
         ERC20Capped(cap * (10**decimals()))
     {
         // payable(msg.sender) -> parceque owner est payable
-        owner = payable(msg.sender);
-        _mint(msg.sender, 1000000 * (10**decimals()));
+        owner = payable(_owner);
+        _mint(_owner, 1000000 * (10**decimals()));
         blockReward = _reward * (10**decimals());
     }
 
-    //nous devons overider le _mint du parent le plus proche pour pouvoir l'utiliser -> car il est déclaré dans plusieurs parents( ERC20, ERC20Capped)
+    //nous devons overider le _mint du parent le plus proche pour pouvoir l'utiliser
+    //-> car il est déclaré dans plusieurs parents( ERC20, ERC20Capped)
+    //dans l'overide-> on précise tous les parents qui possede la fonction _mint()
     function _mint(address account, uint256 amount)
         internal
         virtual
@@ -38,6 +40,7 @@ contract Token is ERC20Burnable, ERC20Capped {
             ERC20.totalSupply() + amount <= cap(),
             "ERC20Capped: cap exceeded"
         );
+        //il faut appeler le mint du parent le plus proche
         super._mint(account, amount);
     }
 
